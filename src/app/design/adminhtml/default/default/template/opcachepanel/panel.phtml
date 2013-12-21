@@ -1,0 +1,17 @@
+<?php
+/** @var $this SchumacherFM_OpCachePanel_Block_Adminhtml_Panel */
+
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo Mage::helper('adminhtml')->__($this->getTitle()) ?></h3></td>
+            <td class="form-buttons"><?php echo $this->getSaveButtonHtml() ?></td>
+        </tr>
+    </table>
+</div>
+
+<?php
+echo $this->getChildHtml('opcache_graph');
+echo $this->getChildHtml('opcache_general');
+?>

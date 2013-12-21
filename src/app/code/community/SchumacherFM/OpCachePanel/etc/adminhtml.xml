@@ -9,10 +9,10 @@
                         <children>
                             <tools>
                                 <children>
-                                    <pgp translate="title" module="pgp">
-                                        <title>PGP/GPG Section</title>
-                                        <sort_order>300</sort_order>
-                                    </pgp>
+                                    <opcache translate="title" module="opcache">
+                                        <title>OpCache Section</title>
+                                        <sort_order>400</sort_order>
+                                    </opcache>
                                 </children>
                             </tools>
                         </children>
@@ -30,7 +30,7 @@
                         <children>
                             <config>
                                 <children>
-                                    <schumacherfm translate="title" module="pgp">
+                                    <schumacherfm translate="title" module="opcache">
                                         <title>@SchumacherFM (Config)</title>
                                     </schumacherfm>
                                 </children>
@@ -45,11 +45,11 @@
     <menu>
         <system>
             <children>
-                <pgp translate="title" module="pgp">
-                    <title>PGP Keys</title>
-                    <action>adminhtml/pgpkey</action>
-                    <sort_order>11</sort_order>
-                </pgp>
+                <opcache translate="title" module="opcache">
+                    <title>OpCache Panel</title>
+                    <action>adminhtml/opCachePanel</action>
+                    <sort_order>12</sort_order>
+                </opcache>
             </children>
         </system>
     </menu>
@@ -59,10 +59,10 @@
                 <children>
                     <system>
                         <children>
-                            <pgp translate="title" module="pgp">
-                                <title>PGP Keys</title>
-                                <sort_order>11</sort_order>
-                            </pgp>
+                            <opcache translate="title" module="opcache">
+                                <title>Opcache Panel</title>
+                                <sort_order>12</sort_order>
+                            </opcache>
                         </children>
                     </system>
                 </children>

@@ -6,7 +6,7 @@
  * @copyright   Copyright (c)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class SchumacherFM_OpCachePanel_Adminhtml_CachePanelController extends Mage_Adminhtml_Controller_Action
+class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Adminhtml_Controller_Action
 {
     /**
      * key list
@@ -16,9 +16,8 @@ class SchumacherFM_OpCachePanel_Adminhtml_CachePanelController extends Mage_Admi
     public function indexAction()
     {
         $this->_title($this->__('System'))->_title($this->__('OpCache Panel'));
-
         $this->loadLayout();
-        $this->_setActiveMenu('system/cachepanel');
+        $this->_setActiveMenu('system/opcache');
         $this->renderLayout();
     }
 

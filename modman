@@ -3,3 +3,5 @@ src/app/etc/modules/SchumacherFM_OpCachePanel.xml app/etc/modules/SchumacherFM_O
 src/app/locale/en_US/SchumacherFM_OpCachePanel.csv app/locale/en_US/SchumacherFM_OpCachePanel.csv
 src/app/locale/de_DE/SchumacherFM_OpCachePanel.csv app/locale/de_DE/SchumacherFM_OpCachePanel.csv
 src/app/design/adminhtml/default/default/layout/opcachepanel.xml app/design/adminhtml/default/default/layout/opcachepanel.xml
+src/app/design/adminhtml/default/default/template/opcachepanel app/design/adminhtml/default/default/template/opcachepanel
+src/skin/adminhtml/default/default/opcachepanel skin/adminhtml/default/default/opcachepanel

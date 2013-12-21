@@ -1,11 +1,10 @@
-<?xml version="1.0"?>
-<!--
+<?xml version="1.0"?><!--
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Helper
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
- * @license     http://www.gnu.org/licenses/gpl.html  GPL
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 -->
 <config>
@@ -17,50 +16,19 @@
 
     <global>
         <models>
-            <pgp>
+            <opcache>
                 <class>SchumacherFM_OpCachePanel_Model</class>
-                <resourceModel>pgp_resource</resourceModel>
-            </pgp>
-            <pgp_resource>
-                <class>SchumacherFM_OpCachePanel_Model_Resource</class>
-                <entities>
-                    <pgp_public_keys>
-                        <table>pgp_public_keys</table>
-                    </pgp_public_keys>
-                </entities>
-            </pgp_resource>
-            <core>
-                <rewrite>
-                    <email_template>SchumacherFM_OpCachePanel_Model_Core_Email_Template</email_template>
-                </rewrite>
-            </core>
+            </opcache>
         </models>
-        <resources>
-            <pgp_setup>
-                <setup>
-                    <module>SchumacherFM_OpCachePanel</module>
-                    <class>SchumacherFM_OpCachePanel_Model_Resource_Setup</class>
-                </setup>
-            </pgp_setup>
-        </resources>
-
-
-        <resources>
-            <pgp_setup>
-                <setup>
-                    <module>SchumacherFM_OpCachePanel</module>
-                </setup>
-            </pgp_setup>
-        </resources>
         <blocks>
-            <pgp>
+            <opcache>
                 <class>SchumacherFM_OpCachePanel_Block</class>
-            </pgp>
+            </opcache>
         </blocks>
         <helpers>
-            <pgp>
+            <opcache>
                 <class>SchumacherFM_OpCachePanel_Helper</class>
-            </pgp>
+            </opcache>
         </helpers>
     </global>
 
@@ -69,7 +37,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <pgp before="Mage_Adminhtml">SchumacherFM_OpCachePanel_Adminhtml</pgp>
+                        <opcache before="Mage_Adminhtml">SchumacherFM_OpCachePanel_Adminhtml</opcache>
                     </modules>
                 </args>
             </adminhtml>
@@ -79,9 +47,9 @@
     <adminhtml>
         <layout>
             <updates>
-                <pgp>
-                    <file>pgp.xml</file>
-                </pgp>
+                <opcache>
+                    <file>opcachepanel.xml</file>
+                </opcache>
             </updates>
         </layout>
         <translate>
@@ -93,79 +61,14 @@
                 </SchumacherFM_OpCachePanel>
             </modules>
         </translate>
-        <events>
-            <admin_user_save_after>
-                <observers>
-                    <schumacherfm_pgp_admin_user>
-                        <class>pgp/observer_adminUser</class>
-                        <method>savePublicKey</method>
-                    </schumacherfm_pgp_admin_user>
-                </observers>
-            </admin_user_save_after>
-
-            <adminhtml_block_html_before>
-                <observers>
-                    <schumacherfm_pgp_system_account>
-                        <class>pgp/observer_systemAccount</class>
-                        <method>injectOpCachePanelForm</method>
-                    </schumacherfm_pgp_system_account>
-                </observers>
-            </adminhtml_block_html_before>
-        </events>
     </adminhtml>
 
     <default>
         <schumacherfm>
-            <pgp>
+            <opcache>
                 <engine>php</engine>
-                <cli_debug>0</cli_debug>
-                <cli_logfile>gpg.log</cli_logfile>
-                <cli_homedir>/tmp</cli_homedir>
-                <cli_binary></cli_binary>
-                <email_force_plain_text>0</email_force_plain_text>
-                <email_html_to_text>0</email_html_to_text>
-                <email_move_subject_to_body>0</email_move_subject_to_body>
-                <email_random_sender>0</email_random_sender>
-            </pgp>
+            </opcache>
         </schumacherfm>
     </default>
 
-    <frontend>
-        <routers>
-            <pgp>
-                <use>standard</use>
-                <args>
-                    <module>SchumacherFM_OpCachePanel</module>
-                    <frontName>pgp</frontName>
-                </args>
-            </pgp>
-        </routers>
-        <translate>
-            <modules>
-                <SchumacherFM_OpCachePanel>
-                    <files>
-                        <default>SchumacherFM_OpCachePanel.csv</default>
-                    </files>
-                </SchumacherFM_OpCachePanel>
-            </modules>
-        </translate>
-        <layout>
-            <updates>
-                <pgp module="SchumacherFM_OpCachePanel">
-                    <file>pgp.xml</file>
-                </pgp>
-            </updates>
-        </layout>
-        <secure_url>
-            <pgp>/pgp/</pgp>
-        </secure_url>
-    </frontend>
-
-    <phpunit>
-        <suite>
-            <modules>
-                <SchumacherFM_OpCachePanel/>
-            </modules>
-        </suite>
-    </phpunit>
 </config>
