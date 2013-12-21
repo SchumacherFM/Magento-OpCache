@@ -1,12 +1,12 @@
 <?php
 /**
- * @category    SchumacherFM_Pgp
+ * @category    SchumacherFM_OpCachePanel
  * @package     Block
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
  * @license     http://www.gnu.org/licenses/gpl.html  GPL
  */
-class SchumacherFM_Pgp_Block_Adminhtml_Pgpkey_Edit_Tab_Content extends Mage_Adminhtml_Block_Widget_Form
+class SchumacherFM_OpCachePanel_Block_Adminhtml_OpCachePanelkey_Edit_Tab_Content extends Mage_Adminhtml_Block_Widget_Form
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
     /**

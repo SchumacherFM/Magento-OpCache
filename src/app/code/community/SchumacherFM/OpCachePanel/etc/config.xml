@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * @category    SchumacherFM_Pgp
+ * @category    SchumacherFM_OpCachePanel
  * @package     Helper
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
@@ -10,19 +10,19 @@
 -->
 <config>
     <modules>
-        <SchumacherFM_Pgp>
+        <SchumacherFM_OpCachePanel>
             <version>1.0.0</version>
-        </SchumacherFM_Pgp>
+        </SchumacherFM_OpCachePanel>
     </modules>
 
     <global>
         <models>
             <pgp>
-                <class>SchumacherFM_Pgp_Model</class>
+                <class>SchumacherFM_OpCachePanel_Model</class>
                 <resourceModel>pgp_resource</resourceModel>
             </pgp>
             <pgp_resource>
-                <class>SchumacherFM_Pgp_Model_Resource</class>
+                <class>SchumacherFM_OpCachePanel_Model_Resource</class>
                 <entities>
                     <pgp_public_keys>
                         <table>pgp_public_keys</table>
@@ -31,15 +31,15 @@
             </pgp_resource>
             <core>
                 <rewrite>
-                    <email_template>SchumacherFM_Pgp_Model_Core_Email_Template</email_template>
+                    <email_template>SchumacherFM_OpCachePanel_Model_Core_Email_Template</email_template>
                 </rewrite>
             </core>
         </models>
         <resources>
             <pgp_setup>
                 <setup>
-                    <module>SchumacherFM_Pgp</module>
-                    <class>SchumacherFM_Pgp_Model_Resource_Setup</class>
+                    <module>SchumacherFM_OpCachePanel</module>
+                    <class>SchumacherFM_OpCachePanel_Model_Resource_Setup</class>
                 </setup>
             </pgp_setup>
         </resources>
@@ -48,18 +48,18 @@
         <resources>
             <pgp_setup>
                 <setup>
-                    <module>SchumacherFM_Pgp</module>
+                    <module>SchumacherFM_OpCachePanel</module>
                 </setup>
             </pgp_setup>
         </resources>
         <blocks>
             <pgp>
-                <class>SchumacherFM_Pgp_Block</class>
+                <class>SchumacherFM_OpCachePanel_Block</class>
             </pgp>
         </blocks>
         <helpers>
             <pgp>
-                <class>SchumacherFM_Pgp_Helper</class>
+                <class>SchumacherFM_OpCachePanel_Helper</class>
             </pgp>
         </helpers>
     </global>
@@ -69,7 +69,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <pgp before="Mage_Adminhtml">SchumacherFM_Pgp_Adminhtml</pgp>
+                        <pgp before="Mage_Adminhtml">SchumacherFM_OpCachePanel_Adminhtml</pgp>
                     </modules>
                 </args>
             </adminhtml>
@@ -86,11 +86,11 @@
         </layout>
         <translate>
             <modules>
-                <SchumacherFM_Pgp>
+                <SchumacherFM_OpCachePanel>
                     <files>
-                        <default>SchumacherFM_Pgp.csv</default>
+                        <default>SchumacherFM_OpCachePanel.csv</default>
                     </files>
-                </SchumacherFM_Pgp>
+                </SchumacherFM_OpCachePanel>
             </modules>
         </translate>
         <events>
@@ -107,7 +107,7 @@
                 <observers>
                     <schumacherfm_pgp_system_account>
                         <class>pgp/observer_systemAccount</class>
-                        <method>injectPgpForm</method>
+                        <method>injectOpCachePanelForm</method>
                     </schumacherfm_pgp_system_account>
                 </observers>
             </adminhtml_block_html_before>
@@ -135,23 +135,23 @@
             <pgp>
                 <use>standard</use>
                 <args>
-                    <module>SchumacherFM_Pgp</module>
+                    <module>SchumacherFM_OpCachePanel</module>
                     <frontName>pgp</frontName>
                 </args>
             </pgp>
         </routers>
         <translate>
             <modules>
-                <SchumacherFM_Pgp>
+                <SchumacherFM_OpCachePanel>
                     <files>
-                        <default>SchumacherFM_Pgp.csv</default>
+                        <default>SchumacherFM_OpCachePanel.csv</default>
                     </files>
-                </SchumacherFM_Pgp>
+                </SchumacherFM_OpCachePanel>
             </modules>
         </translate>
         <layout>
             <updates>
-                <pgp module="SchumacherFM_Pgp">
+                <pgp module="SchumacherFM_OpCachePanel">
                     <file>pgp.xml</file>
                 </pgp>
             </updates>
@@ -164,7 +164,7 @@
     <phpunit>
         <suite>
             <modules>
-                <SchumacherFM_Pgp/>
+                <SchumacherFM_OpCachePanel/>
             </modules>
         </suite>
     </phpunit>

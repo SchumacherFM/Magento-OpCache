@@ -1,38 +1,26 @@
 <?php
 /**
- * @category    SchumacherFM_Pgp
+ * @category    SchumacherFM_OpCachePanel
  * @package     Helper
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
- * @license     http://www.gnu.org/licenses/gpl.html  GPL
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class SchumacherFM_Pgp_Model_Options_Engine
+class SchumacherFM_OpCachePanel_Model_Cache
 {
 
-    /**
-     * Options getter
-     *
-     * @return array
-     */
-    public function toOptionArray()
+    protected $_instance = NULL;
+
+    protected function _getInstance()
     {
-        return array(
-            array('value' => 'php', 'label' => Mage::helper('pgp')->__('PHP based')),
-            array('value' => 'cli', 'label' => Mage::helper('pgp')->__('GPG native binaries')),
-        );
     }
 
-    /**
-     * Get options in "key-value" format
-     *
-     * @return array
-     */
-    public function toArray()
+    public function reset()
     {
-        return array(
-            'php' => Mage::helper('pgp')->__('PHP based'),
-            'cli' => Mage::helper('pgp')->__('GPG native binaries'),
-        );
     }
 
+    public function recheck()
+    {
+
+    }
 }

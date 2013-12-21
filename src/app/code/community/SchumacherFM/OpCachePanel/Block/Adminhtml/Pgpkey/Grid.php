@@ -1,12 +1,12 @@
 <?php
 /**
- * @category    SchumacherFM_Pgp
+ * @category    SchumacherFM_OpCachePanel
  * @package     Block
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
  * @license     http://www.gnu.org/licenses/gpl.html  GPL
  */
-class SchumacherFM_Pgp_Block_Adminhtml_Pgpkey_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class SchumacherFM_OpCachePanel_Block_Adminhtml_OpCachePanelkey_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     /**
      * Set defaults
@@ -25,7 +25,7 @@ class SchumacherFM_Pgp_Block_Adminhtml_Pgpkey_Grid extends Mage_Adminhtml_Block_
     /**
      * Instantiate and prepare collection
      *
-     * @return SchumacherFM_Pgp_Model_Resource_Pubkeys_Collection
+     * @return SchumacherFM_OpCachePanel_Model_Resource_Pubkeys_Collection
      */
     protected function _prepareCollection()
     {
