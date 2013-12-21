@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    SchumacherFM_Pgp
+ * @package     Helper
+ * @author      Cyrill at Schumacher dot fm / @SchumacherFM
+ * @copyright   Copyright (c)
+ * @license     http://www.gnu.org/licenses/gpl.html  GPL
+ */
+-->
+<config>
+    <modules>
+        <SchumacherFM_Pgp>
+            <version>1.0.0</version>
+        </SchumacherFM_Pgp>
+    </modules>
+
+    <global>
+        <models>
+            <pgp>
+                <class>SchumacherFM_Pgp_Model</class>
+                <resourceModel>pgp_resource</resourceModel>
+            </pgp>
+            <pgp_resource>
+                <class>SchumacherFM_Pgp_Model_Resource</class>
+                <entities>
+                    <pgp_public_keys>
+                        <table>pgp_public_keys</table>
+                    </pgp_public_keys>
+                </entities>
+            </pgp_resource>
+            <core>
+                <rewrite>
+                    <email_template>SchumacherFM_Pgp_Model_Core_Email_Template</email_template>
+                </rewrite>
+            </core>
+        </models>
+        <resources>
+            <pgp_setup>
+                <setup>
+                    <module>SchumacherFM_Pgp</module>
+                    <class>SchumacherFM_Pgp_Model_Resource_Setup</class>
+                </setup>
+            </pgp_setup>
+        </resources>
+
+
+        <resources>
+            <pgp_setup>
+                <setup>
+                    <module>SchumacherFM_Pgp</module>
+                </setup>
+            </pgp_setup>
+        </resources>
+        <blocks>
+            <pgp>
+                <class>SchumacherFM_Pgp_Block</class>
+            </pgp>
+        </blocks>
+        <helpers>
+            <pgp>
+                <class>SchumacherFM_Pgp_Helper</class>
+            </pgp>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <pgp before="Mage_Adminhtml">SchumacherFM_Pgp_Adminhtml</pgp>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <pgp>
+                    <file>pgp.xml</file>
+                </pgp>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <SchumacherFM_Pgp>
+                    <files>
+                        <default>SchumacherFM_Pgp.csv</default>
+                    </files>
+                </SchumacherFM_Pgp>
+            </modules>
+        </translate>
+        <events>
+            <admin_user_save_after>
+                <observers>
+                    <schumacherfm_pgp_admin_user>
+                        <class>pgp/observer_adminUser</class>
+                        <method>savePublicKey</method>
+                    </schumacherfm_pgp_admin_user>
+                </observers>
+            </admin_user_save_after>
+
+            <adminhtml_block_html_before>
+                <observers>
+                    <schumacherfm_pgp_system_account>
+                        <class>pgp/observer_systemAccount</class>
+                        <method>injectPgpForm</method>
+                    </schumacherfm_pgp_system_account>
+                </observers>
+            </adminhtml_block_html_before>
+        </events>
+    </adminhtml>
+
+    <default>
+        <schumacherfm>
+            <pgp>
+                <engine>php</engine>
+                <cli_debug>0</cli_debug>
+                <cli_logfile>gpg.log</cli_logfile>
+                <cli_homedir>/tmp</cli_homedir>
+                <cli_binary></cli_binary>
+                <email_force_plain_text>0</email_force_plain_text>
+                <email_html_to_text>0</email_html_to_text>
+                <email_move_subject_to_body>0</email_move_subject_to_body>
+                <email_random_sender>0</email_random_sender>
+            </pgp>
+        </schumacherfm>
+    </default>
+
+    <frontend>
+        <routers>
+            <pgp>
+                <use>standard</use>
+                <args>
+                    <module>SchumacherFM_Pgp</module>
+                    <frontName>pgp</frontName>
+                </args>
+            </pgp>
+        </routers>
+        <translate>
+            <modules>
+                <SchumacherFM_Pgp>
+                    <files>
+                        <default>SchumacherFM_Pgp.csv</default>
+                    </files>
+                </SchumacherFM_Pgp>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <pgp module="SchumacherFM_Pgp">
+                    <file>pgp.xml</file>
+                </pgp>
+            </updates>
+        </layout>
+        <secure_url>
+            <pgp>/pgp/</pgp>
+        </secure_url>
+    </frontend>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <SchumacherFM_Pgp/>
+            </modules>
+        </suite>
+    </phpunit>
+</config>

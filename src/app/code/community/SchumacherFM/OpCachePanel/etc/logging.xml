@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category    SchumacherFM_Pgp
+ * @package     Model
+ * @author      Cyrill at Schumacher dot fm / @SchumacherFM
+ * @copyright   Copyright (c)
+ * @license     http://www.gnu.org/licenses/gpl.html  GPL
+ */
+-->
+<logging>
+    <pgp translate="label">
+        <label>Manage PGP Keys</label>
+        <expected_models>
+            <pgp__banner/>
+        </expected_models>
+        <actions>
+            <adminhtml_pgpkey_edit>
+                <action>view</action>
+            </adminhtml_pgpkey_edit>
+
+            <adminhtml_pgpkey_save>
+                <action>save</action>
+                <skip_on_back>
+                    <adminhtml_pgpkey_edit/>
+                </skip_on_back>
+            </adminhtml_pgpkey_save>
+
+            <adminhtml_pgpkey_delete>
+                <action>delete</action>
+            </adminhtml_pgpkey_delete>
+
+            <adminhtml_pgpkey_massDelete>
+                <action>massDelete</action>
+            </adminhtml_pgpkey_massDelete>
+        </actions>
+    </pgp>
+</logging>

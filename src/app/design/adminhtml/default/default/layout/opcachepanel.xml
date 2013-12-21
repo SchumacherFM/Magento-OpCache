@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout>
+
+    <adminhtml_opcachepanel_index>
+        <reference name="content">
+            <block type="pgp/adminhtml_opcachepanel" name="opcachepanel_list"/>
+        </reference>
+    </adminhtml_opcachepanel_index>
+
+    <adminhtml_opcachepanel_edit>
+        <!--<update handle="editor"/>-->
+        <reference name="left">
+            <block type="pgp/adminhtml_opcachepanel_edit_tabs" name="opcachepanel_edit_tabs">
+                <block type="pgp/adminhtml_opcachepanel_edit_tab_content" name="opcachepanel_edit_tab_content"/>
+                <action method="addTab">
+                    <name>main_section</name>
+                    <block>opcachepanel_edit_tab_content</block>
+                </action>
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="pgp/adminhtml_opcachepanel_edit" name="opcachepanel_edit_content"/>
+        </reference>
+    </adminhtml_opcachepanel_edit>
+
+    <adminhtml_opcachepanel_grid>
+        <remove name="root"/>
+        <block type="pgp/adminhtml_opcachepanel_grid" name="opcachepanel_grid" output="toHtml"/>
+    </adminhtml_opcachepanel_grid>
+</layout>

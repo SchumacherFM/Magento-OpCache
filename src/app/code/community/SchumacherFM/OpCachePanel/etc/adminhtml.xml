@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- Add ACL Settings under System > Permissions > Roles -->
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <tools>
+                                <children>
+                                    <pgp translate="title" module="pgp">
+                                        <title>PGP/GPG Section</title>
+                                        <sort_order>300</sort_order>
+                                    </pgp>
+                                </children>
+                            </tools>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <schumacherfm translate="title" module="pgp">
+                                        <title>@SchumacherFM (Config)</title>
+                                    </schumacherfm>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+    <menu>
+        <system>
+            <children>
+                <pgp translate="title" module="pgp">
+                    <title>PGP Keys</title>
+                    <action>adminhtml/pgpkey</action>
+                    <sort_order>11</sort_order>
+                </pgp>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <pgp translate="title" module="pgp">
+                                <title>PGP Keys</title>
+                                <sort_order>11</sort_order>
+                            </pgp>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+</config>
