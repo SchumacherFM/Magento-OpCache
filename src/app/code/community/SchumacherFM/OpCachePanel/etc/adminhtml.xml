@@ -22,25 +22,6 @@
         </resources>
     </acl>
 
-    <acl>
-        <resources>
-            <admin>
-                <children>
-                    <system>
-                        <children>
-                            <config>
-                                <children>
-                                    <schumacherfm translate="title" module="opcache">
-                                        <title>@SchumacherFM (Config)</title>
-                                    </schumacherfm>
-                                </children>
-                            </config>
-                        </children>
-                    </system>
-                </children>
-            </admin>
-        </resources>
-    </acl>
 
     <menu>
         <system>

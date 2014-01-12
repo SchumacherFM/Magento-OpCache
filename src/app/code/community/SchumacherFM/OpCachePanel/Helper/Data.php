@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Helper
@@ -9,12 +10,45 @@
 class SchumacherFM_OpCachePanel_Helper_Data extends Mage_Core_Helper_Abstract
 {
     /**
-     * disable sending via attachment, after decryption user will see plain HTML, not rendered one.
+     * @return bool|string
+     */
+    public function getApiKeyName()
+    {
+        $return = Mage::getStoreConfig('system/opcachepanel/api_key_name');
+        return preg_match('~^[a-z0-9]{32}$~i', $return) !== 1 ? FALSE : $return;
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function getApiKey()
+    {
+        $return = Mage::getStoreConfig('system/opcachepanel/api_key');
+        $retlen = strlen($return);
+        $unique = array();
+
+        $doubles = 0;
+        for ($i = 0; $i < $retlen; $i++) {
+            $char = trim($return[$i]);
+            if (!isset($unique[$char])) {
+                $unique[$char] = 1;
+            } else {
+                $unique[$char]++;
+                $doubles++;
+            }
+        }
+
+        return count($unique) < 32 || $doubles !== 0 ? FALSE : $return;
+    }
+
+    /**
+     * @param null $postApiKey
      *
      * @return bool
      */
-    public function isForcePlainText()
+    public function isApiKeyValid($postApiKey = NULL)
     {
-        return (int)Mage::getStoreConfig('schumacherfm/pgp/email_force_plain_text') === 1;
+        $key = $this->getApiKey();
+        return !empty($key) && $key === $postApiKey;
     }
 }

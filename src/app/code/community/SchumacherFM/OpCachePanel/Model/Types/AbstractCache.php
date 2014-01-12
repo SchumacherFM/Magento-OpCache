@@ -8,5 +8,10 @@
  */
 abstract class SchumacherFM_OpCachePanel_Model_Types_AbstractCache
 {
-
+    /**
+     * resets the cache
+     *
+     * @return mixed
+     */
+    public abstract function reset();
 }

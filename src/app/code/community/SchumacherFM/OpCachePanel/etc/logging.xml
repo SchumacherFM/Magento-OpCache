@@ -5,34 +5,34 @@
  * @package     Model
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
- * @license     http://www.gnu.org/licenses/gpl.html  GPL
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 -->
 <logging>
-    <pgp translate="label">
-        <label>Manage PGP Keys</label>
+    <opcache translate="label">
+        <label>Manage OpCache Keys</label>
         <expected_models>
-            <pgp__banner/>
+            <opcache__banner/>
         </expected_models>
         <actions>
-            <adminhtml_pgpkey_edit>
+            <adminhtml_opcache_edit>
                 <action>view</action>
-            </adminhtml_pgpkey_edit>
+            </adminhtml_opcache_edit>
 
-            <adminhtml_pgpkey_save>
+            <adminhtml_opcache_save>
                 <action>save</action>
                 <skip_on_back>
-                    <adminhtml_pgpkey_edit/>
+                    <adminhtml_opcache_edit/>
                 </skip_on_back>
-            </adminhtml_pgpkey_save>
+            </adminhtml_opcache_save>
 
-            <adminhtml_pgpkey_delete>
+            <adminhtml_opcache_delete>
                 <action>delete</action>
-            </adminhtml_pgpkey_delete>
+            </adminhtml_opcache_delete>
 
-            <adminhtml_pgpkey_massDelete>
+            <adminhtml_opcache_massDelete>
                 <action>massDelete</action>
-            </adminhtml_pgpkey_massDelete>
+            </adminhtml_opcache_massDelete>
         </actions>
-    </pgp>
+    </opcache>
 </logging>

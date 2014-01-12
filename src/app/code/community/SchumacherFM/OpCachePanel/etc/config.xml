@@ -31,7 +31,17 @@
             </opcache>
         </helpers>
     </global>
-
+    <frontend>
+        <routers>
+            <opcache>
+                <use>standard</use>
+                <args>
+                    <module>SchumacherFM_OpCachePanel</module>
+                    <frontName>opcachepanel</frontName>
+                </args>
+            </opcache>
+        </routers>
+    </frontend>
     <admin>
         <routers>
             <adminhtml>
@@ -62,13 +72,5 @@
             </modules>
         </translate>
     </adminhtml>
-
-    <default>
-        <schumacherfm>
-            <opcache>
-                <engine>php</engine>
-            </opcache>
-        </schumacherfm>
-    </default>
 
 </config>

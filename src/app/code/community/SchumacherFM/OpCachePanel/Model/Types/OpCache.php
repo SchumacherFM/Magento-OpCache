@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Helper
@@ -9,4 +10,11 @@
 class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCachePanel_Model_Types_AbstractCache
 {
 
+    /**
+     * @return bool
+     */
+    public function reset()
+    {
+        return opcache_reset();
+    }
 }

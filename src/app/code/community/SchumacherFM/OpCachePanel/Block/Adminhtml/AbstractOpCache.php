@@ -37,7 +37,7 @@ abstract class SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache extends
         if (empty($array) || !is_array($array)) {
             return '';
         }
-        $return   = [];
+        $return   = array();
         $return[] = '<table border="0" cellpadding="3" width="100%">';
         if (!empty($headers)) {
             if (!is_array($headers)) {

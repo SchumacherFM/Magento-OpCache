@@ -1,126 +1,38 @@
 <config>
     <sections>
-        <schumacherfm>
-            <label>@SchumacherFM</label>
-            <tab>advanced</tab>
-            <frontend_type>text</frontend_type>
-            <sort_order>910</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>
+        <system>
             <groups>
-                <pgp translate="label">
-                    <label>PGP/GPG Settings</label>
+                <opcachepanel translate="label">
+                    <label>OpCachePanel Settings</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>30</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <engine translate="label">
-                            <label>Use Engine</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>pgp/options_engine</source_model>
+                        <api_key_name translate="label">
+                            <label>Name of the API Key</label>
+                            <frontend_type>text</frontend_type>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <comment>PHP based encryption or native binaries (must be installed on server).
-                                With the PHP based method only encryption is available.
-                                While with the native binaries (GPG) every option is available.
-                                Always stick to one method, never change that method later.
-                                Try using the GPG method which is more reliable.
-                            </comment>
-                        </engine>
-                        <cli_debug translate="label">
-                            <label>GPG Debug</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Fixed length: 32 characters. A-Z and 0-9</comment>
+                        </api_key_name>
+
+                        <api_key translate="label">
+                            <label>API Key</label>
+                            <frontend_type>text</frontend_type>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <comment>Debug output via Mage::log</comment>
-                        </cli_debug>
-                        <cli_logfile translate="label">
-                            <label>GPG Logfile name</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>30</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <comment>Located in magento-root/var/log/...</comment>
-                        </cli_logfile>
-                        <cli_homedir translate="label">
-                            <label>GPG Home Directory</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>40</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <comment>GPG stores in this path keys and other data. Use /tmp path only in dev env.</comment>
-                        </cli_homedir>
-                        <cli_binary translate="label">
-                            <label>GPG Binary</label>
-                            <frontend_type>text</frontend_type>
-                            <sort_order>50</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <comment>Leave empty for auto-guess otherwise specify the full path to the gpg binary.</comment>
-                        </cli_binary>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Minimum length: 32 characters. Each character can only occur once.</comment>
+                        </api_key>
 
-
-                        <email_force_plain_text translate="label">
-                            <label>Email: Force plain text mode in emails (no multipart)</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>60</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                            <comment>Disable sending via attachment, after decryption user will see plain HTML, not rendered one.</comment>
-                        </email_force_plain_text>
-                        <email_html_to_text translate="label">
-                            <label>Email: Html2Text</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>70</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </email_html_to_text>
-                        <email_move_subject_to_body translate="label">
-                            <label>Email: Move subject to body and send empty subject</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>60</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </email_move_subject_to_body>
-                        <email_move_subject_to_body translate="label">
-                            <label>Email: Move subject to body and send empty subject</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>60</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </email_move_subject_to_body>
-
-                        <email_random_sender translate="label">
-                            <label>Email: Generate random sender name and email</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>60</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>0</show_in_website>
-                            <show_in_store>0</show_in_store>
-                        </email_random_sender>
                     </fields>
-                </pgp>
+                </opcachepanel>
             </groups>
-        </schumacherfm>
+        </system>
     </sections>
 </config>

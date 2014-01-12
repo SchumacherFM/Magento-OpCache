@@ -6,7 +6,7 @@
  * @copyright   Copyright (c)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class SchumacherFM_OpCachePanel_Model_Types_Accelerator extends SchumacherFM_OpCachePanel_Model_Types_AbstractCache
+class SchumacherFM_OpCachePanel_Model_Types_Apc extends SchumacherFM_OpCachePanel_Model_Types_AbstractCache
 {
 
 }
