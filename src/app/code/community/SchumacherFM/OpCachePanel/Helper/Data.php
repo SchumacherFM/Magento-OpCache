@@ -42,12 +42,15 @@ class SchumacherFM_OpCachePanel_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @param null $postApiKey
+     * @param Mage_Core_Controller_Request_Http $request
      *
      * @return bool
      */
-    public function isApiKeyValid($postApiKey = NULL)
+    public function isApiKeyValid(Mage_Core_Controller_Request_Http $request)
     {
+        $apiKeyName = $this->getApiKeyName();
+        $postApiKey = $request->getParam($apiKeyName, NULL);
+
         $key = $this->getApiKey();
         return !empty($key) && $key === $postApiKey;
     }
