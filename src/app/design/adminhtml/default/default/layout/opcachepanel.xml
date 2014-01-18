@@ -16,7 +16,36 @@
         <reference name="content">
             <block type="opcache/adminhtml_panel" name="opcache_panel" template="opcachepanel/panel.phtml">
                 <block type="opcache/adminhtml_graph" name="opcache_graph" template="opcachepanel/graph.phtml"/>
-                <block type="opcache/adminhtml_general" name="opcache_general" template="opcachepanel/general.phtml"/>
+                <block type="opcache/adminhtml_general" name="opcache_general" template="opcachepanel/datagrid.phtml">
+                    <action method="setOpTitle">
+                        <value>General</value>
+                    </action>
+                    <action method="setOpMethod">
+                        <value>getGeneralDisplay</value>
+                    </action>
+                </block>
+                <block type="opcache/adminhtml_memory" name="opcache_memory" template="opcachepanel/datagrid.phtml">
+                    <action method="setOpTitle">
+                        <value>Memory</value>
+                    </action>
+                    <action method="setOpMethod">
+                        <value>getMemoryDisplay</value>
+                    </action>
+                    <action method="setOpStyle">
+                        <value>op-top</value>
+                    </action>
+                </block>
+                <block type="opcache/adminhtml_statistics" name="opcache_statistics" template="opcachepanel/datagrid.phtml">
+                    <action method="setOpTitle">
+                        <value>Statistics</value>
+                    </action>
+                    <action method="setOpMethod">
+                        <value>getStatisticsDisplay</value>
+                    </action>
+                    <action method="setOpStyle">
+                        <value>op-top</value>
+                    </action>
+                </block>
             </block>
         </reference>
     </adminhtml_opcachepanel_index>

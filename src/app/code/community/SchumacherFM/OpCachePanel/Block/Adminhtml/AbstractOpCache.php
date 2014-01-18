@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Block
@@ -14,6 +15,17 @@ abstract class SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache extends
     {
         $this->_cachePrefix = function_exists('opcache_reset') ? 'opcache_' : (function_exists('accelerator_reset') ? 'accelerator_' : '');
         parent::_construct();
+    }
+
+    /**
+     * @return bool|mixed
+     */
+    protected function _getStatus()
+    {
+        if (function_exists($this->_cachePrefix . 'get_status')) {
+            return call_user_func($this->_cachePrefix . 'get_status');
+        }
+        return FALSE;
     }
 
     /**
@@ -73,5 +85,69 @@ abstract class SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache extends
         }
         $return[] = '</table>';
         return implode(PHP_EOL, $return);
+    }
+
+    /**
+     * @param int $size
+     * @param int $precision
+     *
+     * @return string
+     */
+    protected function _formatBytes($size, $precision = 2)
+    {
+        $base     = log($size) / log(1024);
+        $suffixes = array('', 'k', 'M', 'G', 'T');
+        $fbase    = floor($base);
+
+        return isset($suffixes[$fbase]) ? round(pow(1024, $base - $fbase), $precision) . $suffixes[$fbase] : '';
+    }
+
+    /**
+     * @param   int   $time
+     * @param     int $original
+     * @param int     $extended
+     * @param string  $text
+     *
+     * @return string
+     */
+    protected function _timeSince($time, $original, $extended = 0, $text = 'ago')
+    {
+        $time   = $time - $original;
+        $day    = $extended ? floor($time / 86400) : round($time / 86400, 0);
+        $amount = 0;
+        $unit   = '';
+        if ($time < 86400) {
+            if ($time < 60) {
+                $amount = $time;
+                $unit   = 'second';
+            } elseif ($time < 3600) {
+                $amount = floor($time / 60);
+                $unit   = 'minute';
+            } else {
+                $amount = floor($time / 3600);
+                $unit   = 'hour';
+            }
+        } elseif ($day < 14) {
+            $amount = $day;
+            $unit   = 'day';
+        } elseif ($day < 56) {
+            $amount = floor($day / 7);
+            $unit   = 'week';
+        } elseif ($day < 672) {
+            $amount = floor($day / 30);
+            $unit   = 'month';
+        } else {
+            $amount = intval(2 * ($day / 365)) / 2;
+            $unit   = 'year';
+        }
+
+        if ($amount != 1) {
+            $unit .= 's';
+        }
+        if ($extended && $time > 60) {
+            $text = ' and ' . $this->_timeSince($time, $time < 86400 ? ($time < 3600 ? $amount * 60 : $amount * 3600) : $day * 86400, 0, '') . $text;
+        }
+
+        return $amount . ' ' . $unit . ' ' . $text;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Block
@@ -45,24 +46,24 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Graph extends SchumacherFM_OpCac
         $graphs['restarts']['memory'] = $status[$this->_cachePrefix . 'statistics']['oom_restarts'];
         $graphs['restarts']['total']  = array_sum($graphs['restarts']);
 
-        $return = [];
+        $return = array();
         foreach ($graphs as $caption => $graph) {
             $return[] = '<div class="graph"><div class="pheader">' . $caption . '</div><table border="0" cellpadding="0" cellspacing="0">';
+            $total    = FALSE;
             foreach ($graph as $label => $value) {
-                $total = FALSE;
-                if ($label == 'total') {
+                if ($label === 'total') {
                     $key          = 0;
                     $total        = $value;
-                    $totalDisplay = '<td rowspan="3" class="total"><span>' . ($total > 999999 ? round($total / 1024 / 1024) . 'M' : ($total > 9999 ? round($total / 1024) . 'K' : $total)) . '</span><div></div></td>';
+                    $totalDisplay = '<td rowspan="3" class="total"><span>' . ($caption === 'memory' ? $this->_formatBytes($total) : $total) .
+                        '</span><div></div></td>';
                     continue;
                 }
-                $percent  = $total ? floor($value * 100 / $total) : ''; // @todo bug
-                $percent  = (!$percent || $percent > 99) ? '' : $percent . '%';
-                Zend_Debug::dump($percent);
+                $percent = $total ? floor($value * 100 / $total) : '';
+                $percent = (!$percent || $percent > 99) ? '' : $percent . '%';
 
-                $return[] = '<tr>' . $totalDisplay . '<td class="actual">' . ($value > 999999 ? round($value / 1024 / 1024) . 'M' : ($value > 9999 ? round
-                        ($value / 1024) . 'K' : $value)) . '</td><td class="bar ' . $colors[$key] . '" height="' . $percent . '">' . $percent . '</td><td>' . $label .
-                    '</td></tr>';
+                $return[] = '<tr>' . $totalDisplay . '<td class="actual">' . (
+                    $caption === 'memory' ? $this->_formatBytes($value) : $value
+                    ) . '</td><td class="bar ' . $colors[$key] . '" height="' . $percent . '">' . $percent . '</td><td>' . $label . '</td></tr>';
                 $key++;
                 $totalDisplay = '';
             }

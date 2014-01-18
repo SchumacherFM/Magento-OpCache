@@ -1,7 +1,7 @@
 .entry-edit {
-    width: 49%;
-    float:left;
-    padding-right: 1%;
+    width         : 49%;
+    float         : left;
+    padding-right : 1%;
 }
 
 .graph {
@@ -76,6 +76,29 @@
 
 .pheader {
     /*background-color : #9999cc;*/
-    font-weight      : bold;
+    font-weight : bold;
     /*color            : #000;*/
+}
+
+.op-top {
+    margin-top : 1.5em;
+}
+
+.datagrid table tbody td {
+    padding     : 2px;
+    text-align  : center;
+    width       : 50%;
+    white-space : nowrap;
+}
+
+.datagrid table tbody td.e {
+    background-color : #ccccff;
+    font-weight      : bold;
+    color            : #000;
+
+}
+
+.datagrid table tbody td.v {
+    background-color : #cccccc;
+    color            : #000;
 }

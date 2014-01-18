@@ -1,0 +1,12 @@
+<?php
+/** @var $this SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache */
+?>
+<div class="entry-edit <?php echo $this->getOpStyle(); ?>">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->getOpTitle() ?></h4>
+    </div>
+    <div class="datagrid">
+        <?php echo $this->{$this->getOpMethod()}(); ?>
+    </div>
+</div>
+
