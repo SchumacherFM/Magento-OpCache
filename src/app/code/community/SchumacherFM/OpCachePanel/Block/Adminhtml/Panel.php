@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Block
@@ -12,24 +13,36 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Panel extends SchumacherFM_OpCac
     public function _construct()
     {
         parent::_construct();
-        $this->setTitle('OpCache Panel');
+        $this->setTitle(Mage::helper('opcache')->__('OpCache Panel'));
     }
 
-    protected function _prepareLayout()
+    public function getResetButton()
     {
-        $this->setChild('save_button',
-            $this->getLayout()->createBlock('adminhtml/widget_button')
-                ->setData(array(
-                    'label'   => Mage::helper('adminhtml')->__('Reset'),
-                    'onclick' => 'configForm.submit()',
-                    'class'   => 'save',
-                ))
-        );
-        return parent::_prepareLayout();
+        return $this->getButtonHtml('Reset Cache', 'confirmedCacheAction(\'' . $this->getResetUrl() . '\')');
     }
 
-    public function getSaveUrl()
+    public function getResetUrl()
     {
-        return $this->getUrl('*/*/save', array('_current' => TRUE));
+        return $this->getUrl('*/opCachePanel/reset', array('_current' => TRUE));
+    }
+
+    public function getRecheckButton()
+    {
+        return $this->getButtonHtml('Recheck Cache', 'confirmedCacheAction(\'' . $this->getRecheckUrl() . '\')');
+    }
+
+    public function getRecheckUrl()
+    {
+        return $this->getUrl('*/opCachePanel/recheck', array('_current' => TRUE));
+    }
+
+    public function getCompileButton()
+    {
+        return $this->getButtonHtml('Compile all PHP files', 'confirmedCacheAction(\'' . $this->getCompileUrl() . '\')');
+    }
+
+    public function getCompileUrl()
+    {
+        return $this->getUrl('*/opCachePanel/compile', array('_current' => TRUE));
     }
 }

@@ -1,10 +1,13 @@
 <?php
+
 /**
  * @category    SchumacherFM_OpCachePanel
  * @package     Controller
  * @author      Cyrill at Schumacher dot fm / @SchumacherFM
  * @copyright   Copyright (c)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ *
+ * @todo        fighting DRY
  */
 class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Adminhtml_Controller_Action
 {
@@ -23,19 +26,47 @@ class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Ad
 
     public function resetAction()
     {
-
+        $result = Mage::getModel('opcache/cache')->reset();
+        if ($result === TRUE) {
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('opcache')->__('Reset cache successful!'));
+        } else {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('opcache')->__('Reset cache failed!'));
+        }
+        $this->_redirect('*/opCachePanel');
     }
 
     public function recheckAction()
     {
+        $result = Mage::getModel('opcache/cache')->recheck();
+        if ($result === TRUE) {
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('opcache')->__('Recheck cache successful!'));
+        } else {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('opcache')->__('Recheck cache failed: ' . $result));
+        }
+        $this->_redirect('*/opCachePanel');
+    }
 
+    public function compileAction()
+    {
+        $result = Mage::getModel('opcache/cache')->compile();
+
+        $msg = array();
+        foreach ($result as $directory => $compiledFiles) {
+            $msg[] = $directory . ': ' . $compiledFiles . ' php files';
+        }
+
+        Mage::getSingleton('adminhtml/session')->addSuccess(
+            Mage::helper('opcache')->__('Compiled: %s', implode(' / ', $msg))
+        );
+
+        $this->_redirect('*/opCachePanel');
     }
 
     /**
      * @todo use http://snapsvg.io/ for chart generation
      */
-    public function graphDataJsonAction(){
-
+    public function graphDataJsonAction()
+    {
     }
 
     /**

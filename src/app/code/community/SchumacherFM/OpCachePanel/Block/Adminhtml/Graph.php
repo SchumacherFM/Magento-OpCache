@@ -15,7 +15,7 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Graph extends SchumacherFM_OpCac
         $graphs        = array();
         $colors        = array('green', 'brown', 'red');
         $primes        = array(223, 463, 983, 1979, 3907, 7963, 16229, 32531, 65407, 130987);
-        $configuration = call_user_func($this->_cachePrefix . 'get_configuration');
+        $configuration = $this->_getConfiguration();
         $status        = call_user_func($this->_cachePrefix . 'get_status');
 
         $graphs['memory']['total']  = $configuration['directives']['opcache.memory_consumption'];

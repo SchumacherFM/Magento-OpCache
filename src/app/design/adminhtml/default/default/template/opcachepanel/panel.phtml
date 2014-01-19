@@ -1,21 +1,21 @@
 <?php
 /** @var $this SchumacherFM_OpCachePanel_Block_Adminhtml_Panel */
-
 ?>
 <div class="content-header">
     <table cellspacing="0">
         <tr>
-            <td><h3><?php echo Mage::helper('adminhtml')->__($this->getTitle()) ?></h3></td>
-            <td class="form-buttons"><?php echo $this->getSaveButtonHtml() ?></td>
+            <td><h3><?php echo $this->getTitle() ?></h3></td>
+            <td class="form-buttons">
+                <?php echo $this->getRecheckButton() ?>
+                <?php echo $this->getResetButton() ?>
+                <?php echo $this->getCompileButton() ?>
+            </td>
         </tr>
     </table>
 </div>
 
 <?php
-echo $this->getChildHtml('opcache_graph');
-echo $this->getChildHtml('opcache_general');
-echo $this->getChildHtml('opcache_memory');
-echo $this->getChildHtml('opcache_statistics');
+echo $this->getChildHtml('opcache_infodata');
 ?>
 
 <div class="content-header" style="clear:both;">
@@ -25,3 +25,10 @@ echo $this->getChildHtml('opcache_statistics');
     <a target="_blank" href="http://pecl.php.net/package/ZendOpcache">pecl</a> |
     <a target="_blank" href="https://github.com/zend-dev/ZendOptimizerPlus/">Zend source</a>
 </div>
+<script>
+    function confirmedCacheAction(url) {
+        if (confirm('Are you sure?')) {
+            window.location.href = url;
+        }
+    }
+</script>

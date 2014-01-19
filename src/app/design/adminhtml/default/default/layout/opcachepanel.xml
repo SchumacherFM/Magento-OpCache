@@ -15,36 +15,72 @@
 
         <reference name="content">
             <block type="opcache/adminhtml_panel" name="opcache_panel" template="opcachepanel/panel.phtml">
-                <block type="opcache/adminhtml_graph" name="opcache_graph" template="opcachepanel/graph.phtml"/>
-                <block type="opcache/adminhtml_general" name="opcache_general" template="opcachepanel/datagrid.phtml">
-                    <action method="setOpTitle">
-                        <value>General</value>
-                    </action>
-                    <action method="setOpMethod">
-                        <value>getGeneralDisplay</value>
-                    </action>
-                </block>
-                <block type="opcache/adminhtml_memory" name="opcache_memory" template="opcachepanel/datagrid.phtml">
-                    <action method="setOpTitle">
-                        <value>Memory</value>
-                    </action>
-                    <action method="setOpMethod">
-                        <value>getMemoryDisplay</value>
-                    </action>
-                    <action method="setOpStyle">
-                        <value>op-top</value>
-                    </action>
-                </block>
-                <block type="opcache/adminhtml_statistics" name="opcache_statistics" template="opcachepanel/datagrid.phtml">
-                    <action method="setOpTitle">
-                        <value>Statistics</value>
-                    </action>
-                    <action method="setOpMethod">
-                        <value>getStatisticsDisplay</value>
-                    </action>
-                    <action method="setOpStyle">
-                        <value>op-top</value>
-                    </action>
+
+                <block type="core/text_list" name="opcache_infodata">
+                    <block type="opcache/adminhtml_graph" name="opcache_graph" template="opcachepanel/graph.phtml"/>
+                    <block type="opcache/adminhtml_general" name="opcache_general" template="opcachepanel/datagrid.phtml">
+                        <action method="setOpTitle">
+                            <value>General</value>
+                        </action>
+                        <action method="setOpMethod">
+                            <value>getGeneralDisplay</value>
+                        </action>
+                    </block>
+                    <block type="opcache/adminhtml_memory" name="opcache_memory" template="opcachepanel/datagrid.phtml">
+                        <action method="setOpTitle">
+                            <value>Memory</value>
+                        </action>
+                        <action method="setOpMethod">
+                            <value>getMemoryDisplay</value>
+                        </action>
+                        <action method="setOpStyle">
+                            <value>op-top</value>
+                        </action>
+                    </block>
+                    <block type="opcache/adminhtml_statistics" name="opcache_statistics" template="opcachepanel/datagrid.phtml">
+                        <action method="setOpTitle">
+                            <value>Statistics</value>
+                        </action>
+                        <action method="setOpMethod">
+                            <value>getStatisticsDisplay</value>
+                        </action>
+                        <action method="setOpStyle">
+                            <value>op-top</value>
+                        </action>
+                    </block>
+                    <block type="opcache/adminhtml_blacklist" name="opcache_blacklist" template="opcachepanel/datagrid.phtml">
+                        <action method="setOpTitle">
+                            <value>Blacklist</value>
+                        </action>
+                        <action method="setOpMethod">
+                            <value>getBlacklistDisplay</value>
+                        </action>
+                        <action method="setOpStyle">
+                            <value>op-top</value>
+                        </action>
+                    </block>
+                    <block type="opcache/adminhtml_functions" name="opcache_functions" template="opcachepanel/datagrid.phtml">
+                        <action method="setOpTitle">
+                            <value>Functions</value>
+                        </action>
+                        <action method="setOpMethod">
+                            <value>getFunctionsDisplay</value>
+                        </action>
+                        <action method="setOpStyle">
+                            <value>op-top</value>
+                        </action>
+                    </block>
+                    <block type="opcache/adminhtml_runtime" name="opcache_runtime" template="opcachepanel/datagrid.phtml">
+                        <action method="setOpTitle">
+                            <value>Runtime</value>
+                        </action>
+                        <action method="setOpMethod">
+                            <value>getRuntimeDisplay</value>
+                        </action>
+                        <action method="setOpStyle">
+                            <value>op-top</value>
+                        </action>
+                    </block>
                 </block>
             </block>
         </reference>

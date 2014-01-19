@@ -18,6 +18,18 @@ abstract class SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache extends
     }
 
     /**
+     * @return bool|array
+     */
+    protected function _getConfiguration()
+    {
+        $configuration = FALSE;
+        if (function_exists($this->_cachePrefix . 'get_configuration')) {
+            $configuration = call_user_func($this->_cachePrefix . 'get_configuration');
+        }
+        return $configuration;
+    }
+
+    /**
      * @return bool|mixed
      */
     protected function _getStatus()

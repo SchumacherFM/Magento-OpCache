@@ -13,7 +13,7 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_General extends SchumacherFM_OpC
     public function getGeneralDisplay()
     {
         $time          = time();
-        $configuration = call_user_func($this->_cachePrefix . 'get_configuration');
+        $configuration = $this->_getConfiguration();
         $host          = function_exists('gethostname') ? @gethostname() : @php_uname('n');
         if (empty($host)) {
             $host = empty($_SERVER['SERVER_NAME']) ? $_SERVER['HOST_NAME'] : $_SERVER['SERVER_NAME'];
@@ -32,16 +32,16 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_General extends SchumacherFM_OpC
 
         $status = $this->_getStatus();
         if (FALSE !== $status) {
-            $uptime = array();
+            $upTime = array();
             if (!empty($status[$this->_cachePrefix . 'statistics']['start_time'])) {
-                $uptime['uptime'] = $this->_timeSince($time, $status[$this->_cachePrefix . 'statistics']['start_time'], 1, '');
+                $upTime['uptime'] = $this->_timeSince($time, $status[$this->_cachePrefix . 'statistics']['start_time'], 1, '');
             }
             if (!empty($status[$this->_cachePrefix . 'statistics']['last_restart_time'])) {
-                $uptime['last_restart'] = $this->_timeSince($time, $status[$this->_cachePrefix . 'statistics']['last_restart_time']);
+                $upTime['last_restart'] = $this->_timeSince($time, $status[$this->_cachePrefix . 'statistics']['last_restart_time']);
             }
 
-            if (!empty($uptime)) {
-                $return[] = $this->_printTable($uptime);
+            if (!empty($upTime)) {
+                $return[] = $this->_printTable($upTime);
             }
         }
 
