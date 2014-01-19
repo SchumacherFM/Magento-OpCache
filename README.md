@@ -12,14 +12,18 @@ Based on: [https://gist.github.com/ck-on/4959032](https://gist.github.com/ck-on/
 - Compile all PHP Files in directories app and lib
 - SVG pie charts with live reload
 
- 
+
 
 Configuration
 -------------
 
-No options available.
+System -> Configuration -> System -> OpCachePanel Settings
 
- 
+Set here the API Key names and values for reseting the cache via cURL or wget with a post request.
+
+POST key=value to: http://host.name/opcachepanel
+
+
 Developer Usage
 ---------------
 
@@ -28,7 +32,7 @@ See model SchumacherFM_OpCachePanel_Model_Cache:
 ```
 <?php  Mage::getModel('opcache/cache')->reset(); ?>
 ```
-   
+
 
 Todo
 ----
