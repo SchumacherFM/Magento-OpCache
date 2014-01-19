@@ -75,4 +75,56 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
 
         return @opcache_compile_file($pathToFile);
     }
+
+    /**
+     * @return bool|array
+     */
+    public function getConfiguration()
+    {
+        $configuration = FALSE;
+        if (function_exists($this->getCachePrefix() . 'get_configuration')) {
+            $configuration = call_user_func($this->getCachePrefix() . 'get_configuration');
+        }
+        return $configuration;
+    }
+
+    /**
+     *
+     */
+    public function getStatistics()
+    {
+        $graphs        = array();
+        $primes        = array(223, 463, 983, 1979, 3907, 7963, 16229, 32531, 65407, 130987);
+        $configuration = $this->getConfiguration();
+        $status        = opcache_get_status();
+
+        $graphs['memory']['total']  = $configuration['directives']['opcache.memory_consumption'];
+        $graphs['memory']['free']   = $status['memory_usage']['free_memory'];
+        $graphs['memory']['used']   = $status['memory_usage']['used_memory'];
+        $graphs['memory']['wasted'] = $status['memory_usage']['wasted_memory'];
+
+        $graphs['keys']['total'] = $status[$this->getCachePrefix() . 'statistics']['max_cached_keys'];
+        foreach ($primes as $prime) {
+            if ($prime >= $graphs['keys']['total']) {
+                $graphs['keys']['total'] = $prime;
+                break;
+            }
+        }
+        $graphs['keys']['free']    = $graphs['keys']['total'] - $status[$this->getCachePrefix() . 'statistics']['num_cached_keys'];
+        $graphs['keys']['scripts'] = $status[$this->getCachePrefix() . 'statistics']['num_cached_scripts'];
+        $graphs['keys']['wasted']  = $status[$this->getCachePrefix() . 'statistics']['num_cached_keys'] - $status[$this->getCachePrefix() . 'statistics']['num_cached_scripts'];
+
+        $graphs['hits']['total']     = 0;
+        $graphs['hits']['hits']      = $status[$this->getCachePrefix() . 'statistics']['hits'];
+        $graphs['hits']['misses']    = $status[$this->getCachePrefix() . 'statistics']['misses'];
+        $graphs['hits']['blacklist'] = $status[$this->getCachePrefix() . 'statistics']['blacklist_misses'];
+        $graphs['hits']['total']     = array_sum($graphs['hits']);
+
+        $graphs['restarts']['total']  = 0;
+        $graphs['restarts']['manual'] = $status[$this->getCachePrefix() . 'statistics']['manual_restarts'];
+        $graphs['restarts']['keys']   = $status[$this->getCachePrefix() . 'statistics']['hash_restarts'];
+        $graphs['restarts']['memory'] = $status[$this->getCachePrefix() . 'statistics']['oom_restarts'];
+        $graphs['restarts']['total']  = array_sum($graphs['restarts']);
+        return $graphs;
+    }
 }

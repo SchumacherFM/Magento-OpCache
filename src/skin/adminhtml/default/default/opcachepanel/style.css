@@ -85,7 +85,7 @@
 }
 
 .datagrid {
-    overflow: scroll;
+    overflow : scroll;
 }
 
 .datagrid table tbody td {
@@ -105,4 +105,14 @@
 .datagrid table tbody td.v {
     background-color : #cccccc;
     color            : #000;
+}
+
+.opPie {
+    float : left;
+    width: 310px;
+}
+
+.opPie:after {
+    content : "";
+    clear   : both;
 }

@@ -1,5 +1,7 @@
 <?php
 /** @var $this SchumacherFM_OpCachePanel_Block_Adminhtml_Panel */
+// get file size summary of files
+// find app/ -type f -name "*.php" | xargs stat -f %z | awk '{s+=$1} END {print s}'
 ?>
 <div class="content-header">
     <table cellspacing="0">
@@ -26,9 +28,152 @@ echo $this->getChildHtml('opcache_infodata');
     <a target="_blank" href="https://github.com/zend-dev/ZendOptimizerPlus/">Zend source</a>
 </div>
 <script>
+    // @todo rewrite with http://nvd3.org/ghpages/line.html and use a time axis
     function confirmedCacheAction(url) {
         if (confirm('Are you sure?')) {
+            $('loading-mask').show();
             window.location.href = url;
         }
     }
+    (function () {
+        var jsonStatUrl = '<?php echo $this->getJsonStatUrl() ?>';
+
+        function PieChart() {
+            this.pieMemory = Raphael('opcache_memory');
+            this.pieKeys = Raphael('opcache_keys');
+            this.pieHits = Raphael('opcache_hits');
+            this.pieRestarts = Raphael('opcache_restarts');
+            this.data = {};
+        }
+
+        PieChart.prototype = {
+            setData: function (data) {
+                this.data = data;
+            },
+            '_reset': function () {
+                this.pieMemory.clear();
+                this.pieKeys.clear();
+                this.pieHits.clear();
+                this.pieRestarts.clear();
+            },
+            drawAll: function () {
+                this._reset();
+                this._drawHits();
+                this._drawRestarts();
+                this._drawMemory();
+                this._drawKeys();
+            },
+            _sort: function (arr) {
+                arr.sort(function (a, b) {
+                    return b.v - a.v; // sort desc
+                });
+                return arr;
+            },
+            _getArrayKv: function (arr, index) {
+                var ret = [];
+                arr.forEach(function (obj) {
+                    ret.push(obj[index]);
+                });
+                return ret;
+            },
+            _drawPie: function (type, data, text) {
+                var pieType = this['pie' + type];
+                var pie = pieType.piechart(150, 190, 110, this._getArrayKv(data, 'v'), {
+                    legend: this._getArrayKv(data, 'l'),
+                    colors: this._getArrayKv(data, 'c'),
+                    legendpos: "north"
+                });
+                pieType
+                    .text(60, 10, text)
+                    .attr({ font: "12px sans-serif" });
+                pie.hover(this._hoverOver, this._hoverOut);
+                return pie;
+            },
+            // #00cc00 = green
+            // #ee0000 = red
+            // #8B4513 = brown
+            '_drawMemory': function () {
+                var memoryData = this.data.memory;
+                var pieData = this._sort([
+                    {v: memoryData.used, c: '#8B4513', l: '%%.%% - Used (' + this._formatBytes(memoryData.used) + ')'},
+                    {v: memoryData.wasted, c: '#ee0000', l: '%%.%% - Wasted (' + this._formatBytes(memoryData.wasted) + ')'},
+                    {v: memoryData.free, c: '#00cc00', l: '%%.%% - Free (' + this._formatBytes(memoryData.free) + ')'}
+                ]);
+                this._drawPie('Memory', pieData, "Total Memory: " + this._formatBytes(memoryData.total));
+            },
+            '_drawKeys': function () {
+                var keys = this.data.keys;
+                var pieData = this._sort([
+                    {v: keys.free, c: '#00cc00', l: '%%.%% - Free'},
+                    {v: keys.scripts, c: '#8B4513', l: '%%.%% - Scripts'},
+                    {v: keys.wasted, c: '#ee0000', l: '%%.%% - Wasted'}
+                ]);
+                this._drawPie('Keys', pieData, "Total Keys: " + keys.total);
+            },
+            '_drawHits': function () {
+                var hits = this.data.hits;
+                var pieData = this._sort([
+                    {v: hits.hits, c: '#00cc00', l: '%%.%% - Hits'},
+                    {v: hits.misses, c: '#8B4513', l: '%%.%% - Misses'},
+                    {v: hits.blacklist, c: '#ee0000', l: '%%.%% - Blacklist'}
+                ]);
+                this._drawPie('Hits', pieData, "Total Hits: " + hits.total);
+            },
+            '_drawRestarts': function () {
+                var restarts = this.data.restarts;
+                restarts.keys = restarts.keys === 0 ? 0.01 : restarts.keys * 100;
+                restarts.manual = restarts.manual === 0 ? 0.01 : restarts.manual * 100;
+                restarts.memory = restarts.memory === 0 ? 0.01 : restarts.memory * 100;
+                var pieData = this._sort([
+                    {v: restarts.keys, c: '#8B4513', l: '%%.%% - Keys'},
+                    {v: restarts.manual, c: '#00cc00', l: '%%.%% - Manual'},
+                    {v: restarts.memory, c: '#ee0000', l: '%%.%% - Memory'}
+                ]);
+                this._drawPie('Restarts', pieData, "Total Restarts: " + restarts.total);
+            },
+            _hoverOver: function () {
+                this.sector.stop();
+                this.sector.scale(1.1, 1.1, this.cx, this.cy);
+
+                if (this.label) {
+                    this.label[0].stop();
+                    this.label[0].attr({ r: 7.5 });
+                    this.label[1].attr({ "font-weight": 800 });
+                }
+            },
+            _hoverOut: function () {
+                this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 500, "bounce");
+
+                if (this.label) {
+                    this.label[0].animate({ r: 5 }, 500, "bounce");
+                    this.label[1].attr({ "font-weight": 400 });
+                }
+            },
+            _formatBytes: function (bytes) {
+                var base = Math.log(~~bytes) / Math.log(1024);
+                var suffixes = ['', 'k', 'M', 'G', 'T'];
+                var fbase = Math.floor(base);
+                return  suffixes[fbase] ? (Math.round(Math.pow(1024, base - fbase) * 100) / 100) + suffixes[fbase] : '';
+            }
+        };
+
+        var piePie = new PieChart();
+
+        function intervalAjax() {
+            new Ajax.Request(jsonStatUrl, {
+                onSuccess: function (response) {
+                    var result = JSON.parse(response.responseText);
+                    piePie.setData(result);
+                    piePie.drawAll();
+                },
+                loaderArea: false,
+                method: 'get'
+            });
+            setTimeout(intervalAjax, 5000);
+        }
+
+        window.onload = intervalAjax;
+
+    }())
 </script>
+

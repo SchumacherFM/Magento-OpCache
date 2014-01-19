@@ -45,4 +45,9 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Panel extends SchumacherFM_OpCac
     {
         return $this->getUrl('*/opCachePanel/compile', array('_current' => TRUE));
     }
+
+    public function getJsonStatUrl(){
+
+        return $this->getUrl('*/opCachePanel/graphDataJson', array('_current' => TRUE));
+    }
 }

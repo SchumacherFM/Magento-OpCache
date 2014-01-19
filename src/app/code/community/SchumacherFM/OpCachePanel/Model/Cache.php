@@ -62,7 +62,7 @@ class SchumacherFM_OpCachePanel_Model_Cache
                 /** @var $file SplFileInfo */
                 if ($file->isFile() && $file->getExtension() === 'php') {
                     $pathToFile = $file->getPath() . DS . $file->getFilename();
-                    $ret = $this->_getInstance()->compile($pathToFile);
+                    $ret        = $this->_getInstance()->compile($pathToFile);
                     if ($ret) {
                         ++$counter;
                     }
@@ -70,6 +70,16 @@ class SchumacherFM_OpCachePanel_Model_Cache
             }
         }
         return $directories;
+    }
+
+    public function getConfiguration()
+    {
+        return $this->_getInstance()->getConfiguration();
+    }
+
+    public function getStatistics()
+    {
+        return $this->_getInstance()->getStatistics();
     }
 
     protected function _isApc()

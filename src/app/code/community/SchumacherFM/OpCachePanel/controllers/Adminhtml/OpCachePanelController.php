@@ -56,17 +56,19 @@ class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Ad
         }
 
         Mage::getSingleton('adminhtml/session')->addSuccess(
-            Mage::helper('opcache')->__('Compiled: %s', implode(' / ', $msg))
+            Mage::helper('opcache')->__('Compiled files:' . PHP_EOL . '%s', implode(PHP_EOL, $msg))
         );
 
         $this->_redirect('*/opCachePanel');
     }
 
-    /**
-     * @todo use http://snapsvg.io/ for chart generation
-     */
     public function graphDataJsonAction()
     {
+        $stat = Mage::getModel('opcache/cache')->getStatistics();
+
+        $this->getResponse()->setHeader('Content-type', 'application/json', TRUE);
+
+        $this->getResponse()->setBody(json_encode($stat));
     }
 
     /**

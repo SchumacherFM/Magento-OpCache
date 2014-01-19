@@ -3,12 +3,24 @@
 
     <adminhtml_opcachepanel_index>
         <reference name="head">
-            <!--<action method="addJs">-->
-            <!--<script>opcachepanel/chart.js</script>-->
-            <!--</action>-->
             <action method="addItem">
                 <type>skin_css</type>
                 <name>opcachepanel/style.css</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>opcachepanel/js/raphael-min.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>opcachepanel/js/g.raphael-min.js</name>
+                <params/>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>opcachepanel/js/g.pie-min.js</name>
                 <params/>
             </action>
         </reference>
@@ -18,6 +30,7 @@
 
                 <block type="core/text_list" name="opcache_infodata">
                     <block type="opcache/adminhtml_graph" name="opcache_graph" template="opcachepanel/graph.phtml"/>
+
                     <block type="opcache/adminhtml_general" name="opcache_general" template="opcachepanel/datagrid.phtml">
                         <action method="setOpTitle">
                             <value>General</value>
