@@ -10,8 +10,7 @@ Based on: [https://gist.github.com/ck-on/4959032](https://gist.github.com/ck-on/
 - Recheck Cache
 - Reset Cache
 - Compile all PHP Files in directories app and lib
-- SVG pie charts with live reload
-
+- SVG pie charts with live reload every 5 seconds.
 
 
 Configuration
@@ -19,9 +18,11 @@ Configuration
 
 System -> Configuration -> System -> OpCachePanel Settings
 
-Set here the API Key names and values for reseting the cache via cURL or wget with a post request.
+Set here the API Key name and value for resetting the cache via cURL or wget with a post request.
 
-POST key=value to: http://host.name/opcachepanel
+```
+curl --data "keyName=keyValue" http://magento-store.tld/opcachepanel
+```
 
 
 Developer Usage
@@ -32,12 +33,12 @@ See model SchumacherFM_OpCachePanel_Model_Cache:
 ```
 <?php  Mage::getModel('opcache/cache')->reset(); ?>
 ```
-
+You cannot clear the cache via command line. Please use the cURL post command.
 
 Todo
 ----
 
-- Use line charts
+- Use line charts with a live view
 - internal refactorings
 
 
