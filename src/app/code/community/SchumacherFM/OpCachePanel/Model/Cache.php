@@ -82,6 +82,11 @@ class SchumacherFM_OpCachePanel_Model_Cache
         return $this->_getInstance()->getStatistics();
     }
 
+    public function isActive()
+    {
+        return $this->_isOpc() || $this->_isApc();
+    }
+
     protected function _isApc()
     {
         return extension_loaded('apc') && (ini_get('apc.enabled') || ini_get('apc.enabled_cli'));

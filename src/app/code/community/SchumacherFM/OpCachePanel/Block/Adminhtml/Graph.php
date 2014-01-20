@@ -13,7 +13,7 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Graph extends SchumacherFM_OpCac
     public function getGraphsDisplay()
     {
         $colors = array('green', 'brown', 'red');
-        $graphs = Mage::getModel('opcache/cache')->getStatistics();
+        $graphs = Mage::getSingleton('opcache/cache')->getStatistics();
         $return = array();
         foreach ($graphs as $caption => $graph) {
             $return[] = '<div class="graph"><div class="pheader">' . $caption . '</div><table border="0" cellpadding="0" cellspacing="0">';

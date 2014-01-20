@@ -22,7 +22,7 @@ abstract class SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache extends
      */
     protected function _getConfiguration()
     {
-        return Mage::getModel('opcache/cache')->getConfiguration();
+        return Mage::getSingleton('opcache/cache')->getConfiguration();
     }
 
     /**
