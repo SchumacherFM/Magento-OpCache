@@ -10,6 +10,14 @@
 class SchumacherFM_OpCachePanel_Block_Adminhtml_Panel extends SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache
 {
 
+    protected function _toHtml()
+    {
+        if (FALSE === Mage::getSingleton('opcache/cache')->isActive()) {
+            return '';
+        }
+        return parent::_toHtml();
+    }
+
     public function _construct()
     {
         parent::_construct();
@@ -46,7 +54,8 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Panel extends SchumacherFM_OpCac
         return $this->getUrl('*/opCachePanel/compile', array('_current' => TRUE));
     }
 
-    public function getJsonStatUrl(){
+    public function getJsonStatUrl()
+    {
 
         return $this->getUrl('*/opCachePanel/graphDataJson', array('_current' => TRUE));
     }

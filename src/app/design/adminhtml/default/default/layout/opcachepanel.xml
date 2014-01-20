@@ -26,6 +26,8 @@
         </reference>
 
         <reference name="content">
+            <block type="opcache/adminhtml_unloaded" name="opcache_unloaded" template="opcachepanel/unloaded.phtml"/>
+
             <block type="opcache/adminhtml_panel" name="opcache_panel" template="opcachepanel/panel.phtml">
 
                 <block type="core/text_list" name="opcache_infodata">
