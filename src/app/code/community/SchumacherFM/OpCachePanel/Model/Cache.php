@@ -89,7 +89,7 @@ class SchumacherFM_OpCachePanel_Model_Cache
 
     protected function _isApc()
     {
-        return extension_loaded('apc') && (ini_get('apc.enabled') || ini_get('apc.enabled_cli'));
+        return extension_loaded('apc') && !extension_loaded('apcu') && (ini_get('apc.enabled') || ini_get('apc.enabled_cli'));
     }
 
     protected function _isOpc()
