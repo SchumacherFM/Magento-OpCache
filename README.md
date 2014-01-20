@@ -62,6 +62,10 @@ About
 History
 -------
 
+#### 1.0.1
+
+- Check if OpCache is enabled
+
 #### 1.0.0
 
 - Initial Release
