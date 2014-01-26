@@ -30,10 +30,7 @@ abstract class SchumacherFM_OpCachePanel_Block_Adminhtml_AbstractOpCache extends
      */
     protected function _getStatus()
     {
-        if (function_exists($this->_cachePrefix . 'get_status')) {
-            return call_user_func($this->_cachePrefix . 'get_status');
-        }
-        return FALSE;
+        return Mage::getSingleton('opcache/cache')->getStatus();
     }
 
     /**

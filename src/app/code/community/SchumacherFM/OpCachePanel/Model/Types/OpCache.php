@@ -63,7 +63,7 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
     /**
      * @param string $pathToFile
      *
-     * @return mixed
+     * @return boolean
      */
     public function compile($pathToFile)
     {
@@ -94,6 +94,14 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
             $configuration = call_user_func($this->getCachePrefix() . 'get_configuration');
         }
         return $configuration;
+    }
+
+    public function getStatus(){
+
+        if (function_exists($this->getCachePrefix() . 'get_status')) {
+            return call_user_func($this->getCachePrefix() . 'get_status');
+        }
+        return FALSE;
     }
 
     /**

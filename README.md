@@ -11,7 +11,7 @@ Based on: [https://gist.github.com/ck-on/4959032](https://gist.github.com/ck-on/
 - Reset Cache
 - Compile all PHP Files in directories app and lib
 - SVG pie charts with live reload every 5 seconds.
-
+- APC/APCu integration lacks (looking for contributors)
 
 Configuration
 -------------
@@ -40,6 +40,7 @@ Todo
 
 - Use line charts with a live view
 - internal refactorings
+- integrate APC better
 
 
 
@@ -56,12 +57,17 @@ About
 -----
 
 - Key: SchumacherFM_OpCache
-- Current Version: 1.0.0
+- Current Version: 1.0.2
 - [Download tarball](https://github.com/SchumacherFM/Magento-OpCache/tags)
 - Donation: [http://www.seashepherd.org/](http://www.seashepherd.org/)
 
 History
 -------
+
+#### 1.0.2
+
+- Check if opcache_compile_file is available
+- A tiny more APC compatibility
 
 #### 1.0.1
 

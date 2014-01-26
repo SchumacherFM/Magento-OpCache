@@ -44,7 +44,7 @@ abstract class SchumacherFM_OpCachePanel_Model_Types_AbstractCache
      *
      * @param string $pathToFile
      *
-     * @return mixed
+     * @return boolean
      */
     public abstract function compile($pathToFile);
 
@@ -54,4 +54,10 @@ abstract class SchumacherFM_OpCachePanel_Model_Types_AbstractCache
      * @return boolean
      */
     public abstract function hasCompiler();
+
+    public abstract function getConfiguration();
+
+    public abstract function getStatistics();
+
+    public abstract function getStatus();
 }
