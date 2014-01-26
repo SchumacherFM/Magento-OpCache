@@ -26,7 +26,7 @@ class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Ad
 
     public function resetAction()
     {
-        $result = Mage::getModel('opcache/cache')->reset();
+        $result = Mage::getSingleton('opcache/cache')->reset();
         if ($result === TRUE) {
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('opcache')->__('Reset cache successful!'));
         } else {
@@ -37,7 +37,7 @@ class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Ad
 
     public function recheckAction()
     {
-        $result = Mage::getModel('opcache/cache')->recheck();
+        $result = Mage::getSingleton('opcache/cache')->recheck();
         if ($result === TRUE) {
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('opcache')->__('Recheck cache successful!'));
         } else {
@@ -48,16 +48,22 @@ class SchumacherFM_OpCachePanel_Adminhtml_OpCachePanelController extends Mage_Ad
 
     public function compileAction()
     {
-        $result = Mage::getModel('opcache/cache')->compile();
+        if (TRUE === Mage::getSingleton('opcache/cache')->hasCompiler()) {
+            $result = Mage::getSingleton('opcache/cache')->compile();
 
-        $msg = array();
-        foreach ($result as $directory => $compiledFiles) {
-            $msg[] = $directory . ': ' . $compiledFiles . ' php files';
+            $msg = array();
+            foreach ($result as $directory => $compiledFiles) {
+                $msg[] = $directory . ': ' . $compiledFiles . ' php files';
+            }
+
+            Mage::getSingleton('adminhtml/session')->addSuccess(
+                Mage::helper('opcache')->__('Compiled files:' . PHP_EOL . '%s', implode(PHP_EOL, $msg))
+            );
+        } else {
+            Mage::getSingleton('adminhtml/session')->addError(
+                Mage::helper('opcache')->__('Compiler not available!')
+            );
         }
-
-        Mage::getSingleton('adminhtml/session')->addSuccess(
-            Mage::helper('opcache')->__('Compiled files:' . PHP_EOL . '%s', implode(PHP_EOL, $msg))
-        );
 
         $this->_redirect('*/opCachePanel');
     }
