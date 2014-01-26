@@ -46,7 +46,10 @@ class SchumacherFM_OpCachePanel_Block_Adminhtml_Panel extends SchumacherFM_OpCac
 
     public function getCompileButton()
     {
-        return $this->getButtonHtml('Compile all PHP files', 'confirmedCacheAction(\'' . $this->getCompileUrl() . '\')');
+        if (Mage::getSingleton('opcache/cache')->hasCompiler()) {
+            return $this->getButtonHtml('Compile all PHP files', 'confirmedCacheAction(\'' . $this->getCompileUrl() . '\')');
+        }
+        return '';
     }
 
     public function getCompileUrl()

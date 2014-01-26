@@ -77,6 +77,14 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
     }
 
     /**
+     * @return bool
+     */
+    public function hasCompiler()
+    {
+        return function_exists('opcache_compile_file');
+    }
+
+    /**
      * @return bool|array
      */
     public function getConfiguration()

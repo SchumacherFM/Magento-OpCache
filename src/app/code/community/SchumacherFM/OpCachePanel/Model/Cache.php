@@ -87,6 +87,11 @@ class SchumacherFM_OpCachePanel_Model_Cache
         return $this->_isOpc() || $this->_isApc();
     }
 
+    public function hasCompiler()
+    {
+        return $this->_getInstance()->hasCompiler();
+    }
+
     protected function _isApc()
     {
         return extension_loaded('apc') && !extension_loaded('apcu') && (ini_get('apc.enabled') || ini_get('apc.enabled_cli'));

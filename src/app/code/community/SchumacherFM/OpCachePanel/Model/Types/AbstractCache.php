@@ -47,4 +47,11 @@ abstract class SchumacherFM_OpCachePanel_Model_Types_AbstractCache
      * @return mixed
      */
     public abstract function compile($pathToFile);
+
+    /**
+     * checks if there is an compiler to preload all files into the cache
+     *
+     * @return boolean
+     */
+    public abstract function hasCompiler();
 }
