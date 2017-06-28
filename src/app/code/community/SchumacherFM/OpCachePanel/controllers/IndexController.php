@@ -14,7 +14,7 @@ class SchumacherFM_OpCachePanel_IndexController extends Mage_Core_Controller_Fro
         $isKeyValid = Mage::helper('opcache')->isApiKeyValid($this->getRequest());
 
         if (!$this->getRequest()->isPost() || TRUE !== $isKeyValid) {
-            return $this->_forward('defaultNoRoute');
+            return $this->_forward('noRoute');
         }
 
         Mage::getModel('opcache/cache')->reset();
