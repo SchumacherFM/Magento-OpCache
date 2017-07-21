@@ -73,7 +73,7 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
 
         $config = opcache_get_configuration();
 
-        $this->_getBlackList = $config['blacklist'];
+        $this->_blackList = array_flip($config['blacklist'])
 
         return $this->_blackList;
     }
@@ -88,7 +88,7 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
 
         $files = $this->_getCompiledFiles();
         $blackList = $this->_getBlackList();
-        if (isset($files[$pathToFile]) || in_array($pathToFile, $blackList)) { // work around to avoid a segmentation fault in php binary  and skip files in opCache black list
+        if (isset($files[$pathToFile]) || isset($blackList[$pathToFile])) { // work around to avoid a segmentation fault in php binary  and skip files in opCache black list
             return TRUE;
         }
 
