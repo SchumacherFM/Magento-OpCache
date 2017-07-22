@@ -73,7 +73,7 @@ class SchumacherFM_OpCachePanel_Model_Types_OpCache extends SchumacherFM_OpCache
 
         $config = opcache_get_configuration();
 
-        $this->_blackList = array_flip($config['blacklist'])
+        $this->_blackList = array_flip($config['blacklist']);
 
         return $this->_blackList;
     }
