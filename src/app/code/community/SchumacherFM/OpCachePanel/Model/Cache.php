@@ -54,21 +54,21 @@ class SchumacherFM_OpCachePanel_Model_Cache
             $baseDir . DS . 'app' . DS => 0,
             $baseDir . DS . 'lib' . DS => 0,
         );
-		$config = $this->getConfiguration();
+        $config = $this->getConfiguration();
         $blacklist = $config['blacklist'];
 
         foreach ($directories as $directory => &$counter) {
             $dir_iterator = new RecursiveDirectoryIterator($directory);
             $iterator     = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
             foreach ($iterator as $file) {
-				if ($blacklist) {
+                if ($blacklist) {
                     foreach ($blacklist as $blacklistedEntry) {
                         if (strncmp($file->getPath() . DS . $file->getFilename(), $blacklistedEntry, strlen($blacklistedEntry)) === 0) {
                             continue 2;
                         }
                     }
                 }
-				
+
                 /** @var $file SplFileInfo */
                 if ($file->isFile() && $file->getExtension() === 'php') {
                     $pathToFile = $file->getPath() . DS . $file->getFilename();
