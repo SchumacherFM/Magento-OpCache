@@ -52,8 +52,15 @@ class SchumacherFM_OpCachePanel_Model_Cache
         $baseDir     = Mage::getBaseDir();
         $directories = array(
             $baseDir . DS . 'app' . DS => 0,
-            $baseDir . DS . 'lib' . DS => 0,
+            $baseDir . DS . 'lib' . DS => 0
         );
+
+       if(defined('COMPILER_INCLUDE_PATH')) {
+            $directories = array(
+                $baseDir . DS . 'includes' . DS => 0
+            );
+       }
+
         $config = $this->getConfiguration();
         $blacklist = $config['blacklist'];
 
