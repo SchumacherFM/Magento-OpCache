@@ -60,7 +60,7 @@ class SchumacherFM_OpCachePanel_Model_Types_Apc extends SchumacherFM_OpCachePane
     {
         $info = apc_cache_info();
 
-        return array_merge($info, array(
+        return array_merge((array)$info, array(
             'blacklist' => ''
         ));
     }
